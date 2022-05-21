@@ -22,7 +22,7 @@ namespace TeamAPI.Controllers
 
         // GET: api/Players
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Player>>> GetPlayer()
+        public async Task<ActionResult<IEnumerable<Player>>> GetPlayers()
         {
           if (_context.Players == null)
           {
@@ -48,24 +48,6 @@ namespace TeamAPI.Controllers
 
             return player;
         }
-
-        //// GET: api/Players/[lastName]
-        //[HttpGet("{lastName}")]
-        //public async Task<ActionResult<Player>> GetPlayer(string lastName)
-        //{
-        //    if (_context.Players == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    var player = await _context.Players.ToListAsync();
-
-        //    var output = player.Select(p => p.LastName == lastName);
-
-
-        //    return output;
-
-        //}
-
 
         // PUT: api/Players/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -105,7 +87,7 @@ namespace TeamAPI.Controllers
         {
           if (_context.Players == null)
           {
-              return Problem("Entity set 'TeamContext.Player'  is null.");
+              return Problem("Entity set 'TeamContext.Players'  is null.");
           }
             _context.Players.Add(player);
             await _context.SaveChangesAsync();
