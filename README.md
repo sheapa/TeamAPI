@@ -99,6 +99,7 @@ For example, we should be able to:
 ## Seed Data
 Build an entire team with one post by posting below JSON through postman using above #8 "Create a Team"
 
+### Team 1
 {
     "id": 1,
     "name": "Panthers",
@@ -143,6 +144,105 @@ Build an entire team with one post by posting below JSON through postman using a
             "id": 8,
             "firstName": "Colin",
             "lastName": "Thompson"
+        }
+    ]
+}
+
+### Team 2
+{
+    "id": 2,
+    "name": "Browns",
+    "location": "Cleveland",
+    "players" : [
+        {
+            "id": 9,
+            "firstName": "Amari",
+            "lastName": "Cooper"
+        },
+        {
+            "id": 10,
+            "firstName": "Stephen",
+            "lastName": "Carlson"
+        },
+        {
+            "id": 11,
+            "firstName": "Joel",
+            "lastName": "Bitonio"
+        },
+        {
+            "id": 12,
+            "firstName": "Hijalte",
+            "lastName": "Froholdt"
+        },
+        {
+            "id": 13,
+            "firstName": "Demetric",
+            "lastName": "Felton"
+        },
+        {
+            "id": 14,
+            "firstName": "Jack",
+            "lastName": "Conklin"
+        },
+        {
+            "id": 15,
+            "firstName": "Kareem",
+            "lastName": "Hunt"
+        },
+        {
+            "id": 16,
+            "firstName": "Joshua",
+            "lastName": "Dobbs"
+        }
+    ]
+}
+
+### Team 3
+
+{
+    "id": 3,
+    "name": "Angles",
+    "location": "Anahiem",
+    "players" : [
+        {
+            "id": 17,
+            "firstName": "Austin",
+            "lastName": "Romine"
+        },
+        {
+            "id": 18,
+            "firstName": "Max",
+            "lastName": "Stassi"
+        },
+        {
+            "id": 19,
+            "firstName": "Kurt",
+            "lastName": "Suzuki"
+        },
+        {
+            "id": 20,
+            "firstName": "Matt",
+            "lastName": "Thaiss"
+        },
+        {
+            "id": 21,
+            "firstName": "Chad",
+            "lastName": "Wallach"
+        },
+        {
+            "id": 22,
+            "firstName": "David",
+            "lastName": "Fletcher"
+        },
+        {
+            "id": 23,
+            "firstName": "Jack",
+            "lastName": "Mayfield"
+        },
+        {
+            "id": 24,
+            "firstName": "Anthony",
+            "lastName": "Rendon"
         }
     ]
 }
