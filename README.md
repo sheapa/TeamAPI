@@ -6,7 +6,7 @@ An API that serves data about teams and thier players.
 
 ## Tools + Languages
 * C# 10
-* * .Net 6
+*.Net 6
 * Visual Studio
 * Entity Framework
 
