@@ -28,7 +28,7 @@ namespace TeamAPI.Controllers
           {
               return NotFound();
           }
-            return await _context.Teams.ToListAsync();
+            return await _context.Teams.Include(t=> t.Players).ToListAsync();
         }
         
         // GET: api/Teams/5 ***GET TEAM BY ID
@@ -80,21 +80,44 @@ namespace TeamAPI.Controllers
         }
 
 
-        // PUT: api/Teams/5
+        // Patch: api/Teams/5 ***ADD PLAYER TO TEAM
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}/addPlayer/{playerId}")]
-        public async Task<IActionResult> PutTeamAddPlayer(int id, Team team, int playerId)
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> PutTeamAddPlayer(int id, [FromBody]int playerId)
         {
-            if (id != team.Id)
+            // Grabs team and includes it's entire lineup of players.
+            var team = _context.Teams.Include(t => t.Players).FirstOrDefault(t => t.Id == id);
+
+            if (team == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            if (team.Players.Count < 8)
+            // check for 8 or more players. 
+            if (_context.Players.Count() >= 8)
             {
-                var player = await _context.Players.FindAsync(playerId);
-                team.Players.Add(player);
+                BadRequest("Team already has 8 players.");
             }
+
+            // check player id is not assigned to different team
+            foreach (var p in _context.Teams.Include(t => t.Players).SelectMany(p => p.Players))
+            {
+                if (p.Id == playerId)
+                {
+                    return BadRequest("Player already on a different team.");
+                }
+            }
+
+            //Grabs first player object with id.
+            var player = _context.Players.FirstOrDefault(p => p.Id == playerId);
+
+            if (player == null)
+            {
+                return NotFound("No player added.");
+            }
+
+            // Adds player to team.
+            team.Players.Add(player);
 
             _context.Entry(team).State = EntityState.Modified;
 
@@ -116,6 +139,8 @@ namespace TeamAPI.Controllers
 
             return NoContent();
         }
+
+        
 
         // PUT: api/Teams/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -148,7 +173,7 @@ namespace TeamAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Teams
+        // POST: api/Teams *** CREATE NEW TEAM
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Team>> PostTeam(Team team)
@@ -156,6 +181,13 @@ namespace TeamAPI.Controllers
           if (_context.Teams == null)
           {
               return Problem("Entity set 'TeamContext.Teams'  is null.");
+          }
+
+          // Rejects duplicate name. 
+          if (_context.Teams.Any(t => t.Name == team.Name) ||
+              _context.Teams.Any(t => t.Location == team.Location))
+          {
+                return BadRequest("Team name or location already in use.");
           }
             _context.Teams.Add(team);
             await _context.SaveChangesAsync();

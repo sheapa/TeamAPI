@@ -12,7 +12,8 @@ namespace TeamAPI.Models
         [Required]
         public string Location { get; set; }
 
-        public List<Player>? Players { get; set; }
+
+        public List<Player> Players { get; set; }
 
     }
 }

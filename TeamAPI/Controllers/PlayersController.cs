@@ -20,7 +20,7 @@ namespace TeamAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Players
+        // GET: api/Players *** GET ALL PLAYERS
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Player>>> GetPlayers()
         {
@@ -31,7 +31,7 @@ namespace TeamAPI.Controllers
             return await _context.Players.ToListAsync();
         }
 
-        // GET: api/Players/5
+        // GET: api/Players/5 *** GET PLAYER BY ID
         [HttpGet("{id}")]
         public async Task<ActionResult<Player>> GetPlayer(int id)
         {
@@ -47,6 +47,24 @@ namespace TeamAPI.Controllers
             }
 
             return player;
+        }
+
+        // GET: api/Players/5 *** GET PLAYER BY LAST NAME
+        [HttpGet("/{lastName}:string")]
+        public async Task<ActionResult<Player>> GetPlayerByLastName([FromQuery(Name = "lastName")]string lastName)
+        {
+            if (_context.Players == null)
+            {
+                return NotFound("Player not found.");
+            }
+            var player = await _context.Players.Where(p => p.LastName == lastName).ToListAsync();
+
+            if (player == null)
+            {
+                return NotFound("Player not found.");
+            }
+
+            return Ok(player);
         }
 
         // PUT: api/Players/5
@@ -95,7 +113,7 @@ namespace TeamAPI.Controllers
             return CreatedAtAction("GetPlayer", new { id = player.Id }, player);
         }
 
-        // DELETE: api/Players/5
+        // DELETE: api/Players/5 *** REMOVE PLAYER FROM TEAM
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePlayer(int id)
         {
