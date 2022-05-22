@@ -249,7 +249,7 @@ Build an entire team with one post by posting below JSON through postman using a
 
 
 ## Resources
-* <a href="[https://www.google.com/](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-6.0&tabs=visual-studio)" target="_blank">Tutorial: Create a web API with ASP.NET Core</a>
+* <a href="https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-6.0&tabs=visual-studio" target="_blank">Tutorial: Create a web API with ASP.NET Core</a>
 * <a href="https://www.youtube.com/watch?v=Fbf_ua2t6v4&t=1810s" target="_blank">CRUD with a .NET 6 Web API & Entity Framework Core 🚀 Full Coursee</a>
 * And StackOverflow of course!
 
