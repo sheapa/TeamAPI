@@ -97,7 +97,7 @@ For example, we should be able to:
     * Deletes player from team. Send existing player ID through postman delete to above address.
     
 ## Seed Data
-Build an entire team wiht one post by posting below JSON through postman using above #8 "Create a Team"
+Build an entire team with one post by posting below JSON through postman using above #8 "Create a Team"
 
 {
     "id": 1,
